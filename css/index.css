@@ -18,10 +18,35 @@ body {
 
 .content-actual-cont {
   height: 100%;
+  background-color: aliceblue;
   display: flex;
-  justify-content: center;
+  flex: 1;
 }
 
-.content-actual-cont div {
-  flex: 1;
+.content-optn-cont,
+.content-grid-cont {
+  flex:1;
+}
+
+.content-grid-cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-cont {
+  background-color: bisque;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 320px;
+  max-height: 320px;
+}
+
+.pixel {
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 5%);
 }
