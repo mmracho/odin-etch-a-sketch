@@ -3,3 +3,25 @@
   padding: 0;
   border: 1px solid red;
 }
+
+body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content-cont {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-actual-cont {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.content-actual-cont div {
+  flex: 1;
+}
