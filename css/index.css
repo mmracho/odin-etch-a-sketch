@@ -36,12 +36,12 @@ body {
 }
 
 .grid-cont {
-  background-color: bisque;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
   width: 320px;
   max-height: 320px;
+  background-color: white;
 }
 
 .pixel {
