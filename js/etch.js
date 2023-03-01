@@ -1,6 +1,7 @@
 // Initial values
 let gridSize = 32;
-let brushColor = 'black';
+let brushColor = 'rgba(0, 0, 0)';
+let strength = 0.2;
 // Enter grid size
 gridSize = 64;
 // Create grid
@@ -45,16 +46,25 @@ function resetColor() {
 }
 
 function colorPixel() {
-  let colorStrength = 0.1
+  let colorStrength = getColorStrength();
+  let color = getColor();
   const pixelColors = this.style.backgroundColor;
   const parts = pixelColors.match(/[\d.]+/g);
   if (parts.length === 3) {
     this.style.backgroundColor = `rgba(0, 0, 0, ${colorStrength})`;
   } else {
-    if (Number(parts[3]) >= Number(0.9)) {
+    if (Number(parts[3]) + colorStrength >= 1) {
       this.style.backgroundColor = `rgba(0, 0, 0, 0.99)`;
     } else {
       this.style.backgroundColor = `rgba(0, 0, 0, ${Number(parts[3]) + colorStrength}`;
     }
   }
+}
+
+function getColorStrength() {
+  return strength;
+}
+
+function getColor() {
+  return brushColor;
 }
