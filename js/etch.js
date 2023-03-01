@@ -1,19 +1,23 @@
-// Initial values
-const gridSlider = document.getElementById('gridSize');
+// Initialization
+const gridSlider = document.getElementById('grid-size');
+const brushSlider = document.getElementById('brush-strength');
 let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
-let strength = 0.2;
-// Enter grid size
-// Create grid
-// clear current grid
+let strength = brushSlider.value || 0.1;
 clearGrid();
-// repopulate grid
 createGrid(getGrid());
 // Color on hover
 // reset colors
 //resetColor();
 
 gridSlider.addEventListener('change', setGridSize);
+brushSlider.addEventListener('change', setBrushStrength);
+
+function setBrushStrength() {
+  strength = this.value;
+  removeMOListeners()
+  createMOListeners()
+}
 
 function setGridSize() {
   gridSize = this.value;
@@ -51,7 +55,7 @@ function resetColor() {
 }
 
 function colorPixel() {
-  let colorStrength = getColorStrength();
+  let colorStrength = Number(getColorStrength());
   let color = getColor();
   const pixelColors = this.style.backgroundColor;
   const parts = pixelColors.match(/[\d.]+/g);
