@@ -1,6 +1,8 @@
 // Initialization
 const gridSlider = document.getElementById('grid-size');
 const brushSlider = document.getElementById('brush-strength');
+const gridSizeValLbl = document.getElementById('grid-size-val');
+const brushStrValLbl = document.getElementById('brush-str-val');
 let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
 let strength = brushSlider.value || 0.1;
@@ -10,13 +12,19 @@ createGrid(getGrid());
 // reset colors
 //resetColor();
 
+// questionable performance
 gridSlider.addEventListener('change', setGridSize);
-brushSlider.addEventListener('change', setBrushStrength);
+gridSlider.addEventListener('input', labelUpdate);
+brushSlider.addEventListener('input', setBrushStrength);
+brushSlider.addEventListener('input', labelUpdate);
+
+function labelUpdate() {
+  if (this.id == 'grid-size' ) gridSizeValLbl.textContent = `${this.value}x${this.value}`;
+  if (this.id == 'brush-strength') brushStrValLbl.textContent = `${this.value*100}%`;
+}
 
 function setBrushStrength() {
   strength = this.value;
-  removeMOListeners()
-  createMOListeners()
 }
 
 function setGridSize() {
