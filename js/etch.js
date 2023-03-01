@@ -1,23 +1,31 @@
 // Initial values
-let gridSize = 32;
+const gridSlider = document.getElementById('gridSize');
+let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
 let strength = 0.2;
 // Enter grid size
-gridSize = 64;
 // Create grid
 // clear current grid
 clearGrid();
 // repopulate grid
-createGrid(gridSize);
+createGrid(getGrid());
 // Color on hover
 // reset colors
 //resetColor();
 
+gridSlider.addEventListener('change', setGridSize);
+
+function setGridSize() {
+  gridSize = this.value;
+  clearGrid();
+  createGrid(getGrid());
+}
 
 function createGrid(size) {
   const gridContainer = document.getElementById('grid-cont');
   const gridContainerSize = gridContainer.offsetWidth - 2;
   const dimension = gridContainerSize / size;
+  removeMOListeners();
   for (let i = 0; i < size ** 2; i++) {
     const divPixel = document.createElement('div');
     divPixel.setAttribute('id', `pix${i}`);
@@ -26,11 +34,8 @@ function createGrid(size) {
     divPixel.style.width = dimension + 'px';
     divPixel.style.backgroundColor = 'rgba(255, 255, 255, 1)'
     gridContainer.appendChild(divPixel);
-
-
-    //move out
-    divPixel.addEventListener('mouseover', colorPixel);
   }
+  createMOListeners();
 }
 
 function clearGrid() {
@@ -61,10 +66,29 @@ function colorPixel() {
   }
 }
 
+function createMOListeners() {
+  const gridContainer = document.getElementById('grid-cont').childNodes;
+  gridContainer.forEach(pixel => {
+    pixel.addEventListener('mouseover', colorPixel);
+  })
+}
+
+function removeMOListeners() {
+  const gridContainer = document.getElementById('grid-cont').childNodes;
+  gridContainer.forEach(pixel => {
+    pixel.removeEventListener('mouseover', colorPixel);
+  })
+}
+
+
 function getColorStrength() {
   return strength;
 }
 
 function getColor() {
   return brushColor;
+}
+
+function getGrid() {
+  return gridSize;
 }
