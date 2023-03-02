@@ -6,17 +6,14 @@ const brushStrValLbl = document.getElementById('brush-str-val');
 const btnClear = document.getElementById('clear-btn');
 const btnRainbow = document.getElementById('rainbow-btn');
 const statusRainbowLbl = document.getElementById('rainbow-mode-status');
-
+const color = document.getElementById('color');
 let switchRainbow = false;
-
 let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
 let strength = brushSlider.value || 0.1;
 clearGrid();
 createGrid(getGrid());
-// Color on hover
-// reset colors
-//resetColor();
+
 
 // questionable performance
 gridSlider.addEventListener('change', setGridSize);
@@ -26,6 +23,8 @@ brushSlider.addEventListener('input', labelUpdate);
 
 btnClear.addEventListener('click', resetColor);
 btnRainbow.addEventListener('click', toggleRainbow);
+
+color.addEventListener('change', setColor);
 
 function toggleRainbow() {
   switchRainbow = !switchRainbow;
@@ -80,21 +79,20 @@ function resetColor() {
 function colorPixel() {
   let colorStrength = Number(getColorStrength());
   let color = getColor();
-
-
   if (switchRainbow) {
     color = randomRainbow();
     this.style.backgroundColor = color;
   } else {
     const pixelColors = this.style.backgroundColor;
-    const parts = pixelColors.match(/[\d.]+/g);
-    if (parts.length === 3) {
-      this.style.backgroundColor = `rgba(0, 0, 0, ${colorStrength - 1})`;
+    const pixelColorsParts = pixelColors.match(/[\d.]+/g);
+    const brushColor = color.match(/[\d.]+/g);
+    if (pixelColorsParts.length === 3) {
+      this.style.backgroundColor = `rgba(${brushColor[0]}, ${brushColor[1]}, ${brushColor[2]}, ${colorStrength - 1})`;
     } else {
-      if (Number(parts[3]) * colorStrength >= 1) {
-        this.style.backgroundColor = `rgba(0, 0, 0, 0.99)`;
+      if (Number(pixelColorsParts[3]) * colorStrength >= 1) {
+        this.style.backgroundColor = `rgba(${brushColor[0]}, ${brushColor[1]}, ${brushColor[2]}, 0.99)`;
       } else {
-        this.style.backgroundColor = `rgba(0, 0, 0, ${Number(parts[3]) * colorStrength}`;
+        this.style.backgroundColor = `rgba(${brushColor[0]}, ${brushColor[1]}, ${brushColor[2]}, ${Number(pixelColorsParts[3]) * colorStrength}`;
       }
     }
   }
@@ -116,13 +114,25 @@ function removeMOListeners() {
 
 function randomRainbow() {
   const rainbowColors = ['rgba(255,0,0)', // red
-                       'rgba(255,165,0)', // orange 
-                       'rgba(255,255,0)', // yellow
-                         'rgba(0,128,0)', // green
-                         'rgba(0,0,255)', // blue
-                        'rgba(75,0,130)', // indigo
-                     'rgba(238,130,238)'];// violet
+    'rgba(255,165,0)', // orange 
+    'rgba(255,255,0)', // yellow
+    'rgba(0,128,0)', // green
+    'rgba(0,0,255)', // blue
+    'rgba(75,0,130)', // indigo
+    'rgba(238,130,238)'];// violet
   return rainbowColors[Math.floor((Math.random() * rainbowColors.length))];
+}
+
+function hexToRgbColor(hex) {
+  const color = hex;
+  const r = parseInt(color.substr(1,2), 16)
+  const g = parseInt(color.substr(3,2), 16)
+  const b = parseInt(color.substr(5,2), 16)
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+function setColor() {
+  brushColor = hexToRgbColor(this.value);
 }
 
 // refactor
