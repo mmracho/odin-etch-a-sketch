@@ -3,7 +3,12 @@ const gridSlider = document.getElementById('grid-size');
 const brushSlider = document.getElementById('brush-strength');
 const gridSizeValLbl = document.getElementById('grid-size-val');
 const brushStrValLbl = document.getElementById('brush-str-val');
-const btnClear = document.getElementById('btn-clear');
+const btnClear = document.getElementById('clear-btn');
+const btnRainbow = document.getElementById('rainbow-btn');
+const statusRainbowLbl = document.getElementById('rainbow-mode-status');
+
+let switchRainbow = false;
+
 let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
 let strength = brushSlider.value || 0.1;
@@ -20,10 +25,17 @@ brushSlider.addEventListener('input', setBrushStrength);
 brushSlider.addEventListener('input', labelUpdate);
 
 btnClear.addEventListener('click', resetColor);
+btnRainbow.addEventListener('click', toggleRainbow);
 
-function labelUpdate() {
+function toggleRainbow() {
+  switchRainbow = !switchRainbow;
+  labelUpdate(this);
+}
+
+function labelUpdate(src) {
   if (this.id == 'grid-size') gridSizeValLbl.textContent = `${this.value}x${this.value}`;
   if (this.id == 'brush-strength') brushStrValLbl.textContent = `${Math.round((this.value - 1) * 100)}%`;
+  if (src.id == 'rainbow-btn') statusRainbowLbl.textContent = switchRainbow ? 'rainbow mode is ON' : 'rainbow mode is OFF';
 }
 
 function setBrushStrength() {
@@ -68,15 +80,22 @@ function resetColor() {
 function colorPixel() {
   let colorStrength = Number(getColorStrength());
   let color = getColor();
-  const pixelColors = this.style.backgroundColor;
-  const parts = pixelColors.match(/[\d.]+/g);
-  if (parts.length === 3) {
-    this.style.backgroundColor = `rgba(0, 0, 0, ${colorStrength - 1})`;
+
+
+  if (switchRainbow) {
+    color = randomRainbow();
+    this.style.backgroundColor = color;
   } else {
-    if (Number(parts[3]) * colorStrength >= 1) {
-      this.style.backgroundColor = `rgba(0, 0, 0, 0.99)`;
+    const pixelColors = this.style.backgroundColor;
+    const parts = pixelColors.match(/[\d.]+/g);
+    if (parts.length === 3) {
+      this.style.backgroundColor = `rgba(0, 0, 0, ${colorStrength - 1})`;
     } else {
-      this.style.backgroundColor = `rgba(0, 0, 0, ${Number(parts[3]) * colorStrength}`;
+      if (Number(parts[3]) * colorStrength >= 1) {
+        this.style.backgroundColor = `rgba(0, 0, 0, 0.99)`;
+      } else {
+        this.style.backgroundColor = `rgba(0, 0, 0, ${Number(parts[3]) * colorStrength}`;
+      }
     }
   }
 }
@@ -95,7 +114,18 @@ function removeMOListeners() {
   })
 }
 
+function randomRainbow() {
+  const rainbowColors = ['rgba(255,0,0)', // red
+                       'rgba(255,165,0)', // orange 
+                       'rgba(255,255,0)', // yellow
+                         'rgba(0,128,0)', // green
+                         'rgba(0,0,255)', // blue
+                        'rgba(75,0,130)', // indigo
+                     'rgba(238,130,238)'];// violet
+  return rainbowColors[Math.floor((Math.random() * rainbowColors.length))];
+}
 
+// refactor
 function getColorStrength() {
   return strength;
 }
