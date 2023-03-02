@@ -19,11 +19,11 @@ gridSlider.addEventListener('input', labelUpdate);
 brushSlider.addEventListener('input', setBrushStrength);
 brushSlider.addEventListener('input', labelUpdate);
 
-btnClear.addEventListener('click',resetColor);
+btnClear.addEventListener('click', resetColor);
 
 function labelUpdate() {
-  if (this.id == 'grid-size' ) gridSizeValLbl.textContent = `${this.value}x${this.value}`;
-  if (this.id == 'brush-strength') brushStrValLbl.textContent = `${this.value*100}%`;
+  if (this.id == 'grid-size') gridSizeValLbl.textContent = `${this.value}x${this.value}`;
+  if (this.id == 'brush-strength') brushStrValLbl.textContent = `${Math.round((this.value - 1) * 100)}%`;
 }
 
 function setBrushStrength() {
@@ -71,12 +71,12 @@ function colorPixel() {
   const pixelColors = this.style.backgroundColor;
   const parts = pixelColors.match(/[\d.]+/g);
   if (parts.length === 3) {
-    this.style.backgroundColor = `rgba(0, 0, 0, ${colorStrength})`;
+    this.style.backgroundColor = `rgba(0, 0, 0, ${colorStrength - 1})`;
   } else {
-    if (Number(parts[3]) + colorStrength >= 1) {
+    if (Number(parts[3]) * colorStrength >= 1) {
       this.style.backgroundColor = `rgba(0, 0, 0, 0.99)`;
     } else {
-      this.style.backgroundColor = `rgba(0, 0, 0, ${Number(parts[3]) + colorStrength}`;
+      this.style.backgroundColor = `rgba(0, 0, 0, ${Number(parts[3]) * colorStrength}`;
     }
   }
 }
