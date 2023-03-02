@@ -3,6 +3,7 @@ const gridSlider = document.getElementById('grid-size');
 const brushSlider = document.getElementById('brush-strength');
 const gridSizeValLbl = document.getElementById('grid-size-val');
 const brushStrValLbl = document.getElementById('brush-str-val');
+const btnClear = document.getElementById('btn-clear');
 let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
 let strength = brushSlider.value || 0.1;
@@ -17,6 +18,8 @@ gridSlider.addEventListener('change', setGridSize);
 gridSlider.addEventListener('input', labelUpdate);
 brushSlider.addEventListener('input', setBrushStrength);
 brushSlider.addEventListener('input', labelUpdate);
+
+btnClear.addEventListener('click',resetColor);
 
 function labelUpdate() {
   if (this.id == 'grid-size' ) gridSizeValLbl.textContent = `${this.value}x${this.value}`;
@@ -59,7 +62,7 @@ function clearGrid() {
 
 function resetColor() {
   const gridContainer = document.querySelectorAll('div.pixel');
-  gridContainer.forEach(pixel => pixel.style.backgroundColor = 'white')
+  gridContainer.forEach(pixel => pixel.style.backgroundColor = 'rgba(255, 255, 255)')
 }
 
 function colorPixel() {
