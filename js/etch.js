@@ -11,8 +11,6 @@ let switchRainbow = false;
 let gridSize = gridSlider.value || 4;
 let brushColor = 'rgba(0, 0, 0)';
 let strength = brushSlider.value || 0.1;
-clearGrid();
-createGrid(getGrid());
 
 
 // questionable performance
@@ -166,4 +164,9 @@ function getColor() {
 
 function getGrid() {
   return gridSize;
+}
+
+window.onload = () => {
+  clearGrid();
+  createGrid(getGrid());
 }
