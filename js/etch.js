@@ -34,7 +34,7 @@ function toggleRainbow() {
     color.setAttribute('disabled', true)
   } else {
     brushSlider.removeAttribute('disabled');
-    color.setAttribute('disabled', true)
+    color.removeAttribute('disabled')
   }
 }
 
@@ -128,8 +128,8 @@ function randomRainbow() {
     'rgba(75,0,130)', // indigo
     'rgba(238,130,238)'];// violet
   const randomColor = rainbowColors[Math.floor((Math.random() * rainbowColors.length))]
-  brushColor = randomColor;
-  color.value = rgbToHexColor(randomColor);
+  //brushColor = randomColor;
+  //color.value = rgbToHexColor(randomColor);
 
   return randomColor;
 }

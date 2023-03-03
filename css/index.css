@@ -67,6 +67,10 @@ footer {
 .content-optn-cont > div {
   padding: 5px;
   margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .content-grid-cont {
