@@ -18,7 +18,7 @@ createGrid(getGrid());
 // questionable performance
 gridSlider.addEventListener('change', setGridSize);
 gridSlider.addEventListener('input', labelUpdate);
-brushSlider.addEventListener('input', setBrushStrength);
+brushSlider.addEventListener('change', setBrushStrength);
 brushSlider.addEventListener('input', labelUpdate);
 
 btnClear.addEventListener('click', resetColor);
@@ -29,6 +29,13 @@ color.addEventListener('change', setColor);
 function toggleRainbow() {
   switchRainbow = !switchRainbow;
   labelUpdate(this);
+  if (switchRainbow) {
+    brushSlider.setAttribute('disabled', true)
+    color.setAttribute('disabled', true)
+  } else {
+    brushSlider.removeAttribute('disabled');
+    color.setAttribute('disabled', true)
+  } 
 }
 
 function labelUpdate(src) {
@@ -120,7 +127,20 @@ function randomRainbow() {
     'rgba(0,0,255)', // blue
     'rgba(75,0,130)', // indigo
     'rgba(238,130,238)'];// violet
-  return rainbowColors[Math.floor((Math.random() * rainbowColors.length))];
+    const randomColor = rainbowColors[Math.floor((Math.random() * rainbowColors.length))]
+    brushColor = randomColor;
+    color.value = rgbToHexColor(randomColor);
+    
+  return randomColor;
+}
+
+function rgbToHexColor(rgb) {
+  const color = rgb;
+  const colorParts = color.match(/[\d.]+/g);
+  const r = Number(colorParts[0]).toString(16).padStart(2, '0');
+  const g = Number(colorParts[1]).toString(16).padStart(2, '0');
+  const b = Number(colorParts[2]).toString(16).padStart(2, '0');
+  return `#${r}${g}${b}`;
 }
 
 function hexToRgbColor(hex) {
