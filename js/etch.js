@@ -52,7 +52,7 @@ function setGridSize() {
 function createGrid(size) {
   const gridContainer = document.getElementById('grid-cont');
   const gridContainerSize = gridContainer.offsetWidth;
-  const dimension = gridContainerSize / size;
+  const dimension = Math.floor((gridContainerSize / size) * 10) / 10;
   removeMOListeners();
   for (let i = 0; i < size ** 2; i++) {
     const divPixel = document.createElement('div');
