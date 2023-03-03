@@ -89,8 +89,8 @@ footer {
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  width: 420px;
-  max-height: 420px;
+  width: 512px;
+  max-height: 512px;
   background-color: white;
   border: 0px;
   padding: 0px;
