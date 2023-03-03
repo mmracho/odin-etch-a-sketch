@@ -13,15 +13,12 @@ let brushColor = 'rgba(0, 0, 0)';
 let strength = brushSlider.value || 0.1;
 
 
-// questionable performance
 gridSlider.addEventListener('change', setGridSize);
 gridSlider.addEventListener('input', labelUpdate);
 brushSlider.addEventListener('change', setBrushStrength);
 brushSlider.addEventListener('input', labelUpdate);
-
 btnClear.addEventListener('click', resetColor);
 btnRainbow.addEventListener('click', toggleRainbow);
-
 color.addEventListener('change', setColor);
 
 function toggleRainbow() {
@@ -128,7 +125,6 @@ function randomRainbow() {
   const randomColor = rainbowColors[Math.floor((Math.random() * rainbowColors.length))]
   //brushColor = randomColor;
   //color.value = rgbToHexColor(randomColor);
-
   return randomColor;
 }
 
@@ -165,6 +161,7 @@ function getColor() {
 function getGrid() {
   return gridSize;
 }
+//
 
 window.onload = () => {
   clearGrid();
