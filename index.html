@@ -6,46 +6,52 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="The Odin Project: Etch-A-Sketch exercise">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
   <title>Etch-A-Sketch</title>
   <link rel="stylesheet" href="./css/index.css">
   <script src="./js/etch.js" defer></script>
 </head>
 
 <body>
-  <header class="hdr-cont">header</header>
+  <!-- <header class="hdr-cont">header</header> -->
   <div class="main-content-cont">
     <div class="content-banner-cont">banner</div>
     <div class="content-actual-cont">
       <div class="content-optn-cont">
         <div class="grid-slider-cont">
-          <label id="grid-size-lbl">grid size</label>
+          <label id="grid-size-lbl" for="grid-size">grid size</label>
           <input type="range" min="4" max="64" step="4" value="32" class="slider" id="grid-size">
           <label id="grid-size-val">32x32</label>
         </div>
         <div class="brush-slider-cont">
-          <label id="brush-str-lbl">brush strength</label>
+          <label id="brush-str-lbl" for="brush-strength">brush strength</label>
           <input type="range" min="1.1" max="2" step="0.1" value="1.5" class="slider" id="brush-strength">
           <label id="brush-str-val">50%</label>
         </div>
         <div class="color-picker-cont">
-          <label id="color-picker-lbl">color picker: </label>
+          <label id="color-picker-lbl" for="color">color picker</label>
           <input type="color" value="#000000" id="color">
         </div>
         <div class="rainbow-btn-cont">
-          <button id="rainbow-btn">Rainbow</button>
-          <label id="rainbow-mode-status">rainbow mode is OFF</label>
+          <label id="rainbow-mode-status">rainbow mode</label>
+          <button id="rainbow-btn">off</button>
         </div>
         <div class="clear-btn-cont">
-          <button id="clear-btn">Clear</button>
+          <button id="clear-btn">clear</button>
         </div>
       </div>
       <div class="content-grid-cont">
-        <p>heading</p>
-        <div id="grid-cont" class="grid-cont"></div>
+        <p id="game-title">etch-a-sketch</p>
+        <div id="grid-cont-borders">
+          <div id="grid-cont" class="grid-cont"></div>
+        </div>
       </div>
     </div>
   </div>
-  <footer class="ftr-cont">footer</footer>
+  <footer class="ftr-cont">created by: Martin Racho <span><a href="https://github.com/mmracho"><img class="ft-imgs"
+          src="./img/github-mark-white.svg" alt="My GitHub link" /></a></span></footer>
 </body>
 
 </html>

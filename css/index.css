@@ -1,31 +1,72 @@
 * {
   margin: 0;
   padding: 0;
-  border: 1px solid red;
+  border: 0px solid red;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  font-family: 'Bebas Neue', cursive, sans-serif;
+  font-size: 20px;
+}
+
+header {
+  background-color: #372C38;
+  color: white;
 }
 
 body {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  background-color: #888595;
+}
+
+footer {
+  background-color: #372C38;
+  color: white;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .main-content-cont {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 90vh;
+}
+
+.content-banner-cont {
+  background-color: #888595;
+  color: white;
+  height: 0vh;
 }
 
 .content-actual-cont {
   height: 100%;
-  background-color: aliceblue;
+  background-color: #F5F0F1;
   display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }
 
 .content-optn-cont,
 .content-grid-cont {
-  flex:1;
+  flex: 0;
+  margin-top: -5%;
+}
+
+.content-optn-cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.content-optn-cont > div {
+  padding: 5px;
+  margin: 5px;
 }
 
 .content-grid-cont {
@@ -33,6 +74,11 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+#grid-cont-borders {
+  border: 10px solid #DE4839;
+  border-radius: 10px;
 }
 
 .grid-cont {
@@ -49,4 +95,42 @@ body {
   box-sizing: border-box;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 5%);
+}
+
+button {
+  height: 30px;
+  width: 80px;
+  background-color: #E09E89;
+  color: #F5F0F1;
+  border-radius: 5%;
+  margin: 2px;
+  font-size: large;
+}
+
+#clear-btn {
+  background-color: #DE4839;
+}
+
+button:hover {
+  filter: brightness(80%);
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+img.ft-imgs {
+  padding: 5px;
+  width: 35px;
+  height: 35px;
+  filter: brightness(0%) saturate(100%) invert(100%);
+}
+
+img.ft-imgs:hover {
+  filter: brightness(80%) saturate(100%);
+}
+
+#game-title {
+  font-family: 'Bebas Neue', cursive, sans-serif;
+  font-size: 40px;
 }

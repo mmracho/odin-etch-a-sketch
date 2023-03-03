@@ -35,13 +35,13 @@ function toggleRainbow() {
   } else {
     brushSlider.removeAttribute('disabled');
     color.setAttribute('disabled', true)
-  } 
+  }
 }
 
 function labelUpdate(src) {
   if (this.id == 'grid-size') gridSizeValLbl.textContent = `${this.value}x${this.value}`;
   if (this.id == 'brush-strength') brushStrValLbl.textContent = `${Math.round((this.value - 1) * 100)}%`;
-  if (src.id == 'rainbow-btn') statusRainbowLbl.textContent = switchRainbow ? 'rainbow mode is ON' : 'rainbow mode is OFF';
+  if (src.id == 'rainbow-btn') src.textContent = switchRainbow ? 'on' : 'off';
 }
 
 function setBrushStrength() {
@@ -56,7 +56,7 @@ function setGridSize() {
 
 function createGrid(size) {
   const gridContainer = document.getElementById('grid-cont');
-  const gridContainerSize = gridContainer.offsetWidth - 2;
+  const gridContainerSize = gridContainer.offsetWidth;
   const dimension = gridContainerSize / size;
   removeMOListeners();
   for (let i = 0; i < size ** 2; i++) {
@@ -127,10 +127,10 @@ function randomRainbow() {
     'rgba(0,0,255)', // blue
     'rgba(75,0,130)', // indigo
     'rgba(238,130,238)'];// violet
-    const randomColor = rainbowColors[Math.floor((Math.random() * rainbowColors.length))]
-    brushColor = randomColor;
-    color.value = rgbToHexColor(randomColor);
-    
+  const randomColor = rainbowColors[Math.floor((Math.random() * rainbowColors.length))]
+  brushColor = randomColor;
+  color.value = rgbToHexColor(randomColor);
+
   return randomColor;
 }
 
